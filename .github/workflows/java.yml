@@ -1,40 +1,16 @@
 name: Demo
 
 on:
-push:
-branches: \["main"]
+  push:
+    branches: ["main"]
 
 jobs:
-java\_runner:
-runs-on: ubuntu-latest
-steps:
-\- name: Checkout
-uses: actions/checkout\@v4
-\- name: compile
-run: javac -d bin src/Hello.java
-\- name: Setup Pages
-run: java -cp bin Hello
-name: Java Compile and Run
-
-on:
-  workflow_dispatch:
-
-jobs:
-  build-and-run:
+  java_runner:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Create sample Java file (if not exists)
-        run: |
-          mkdir -p src
-          echo 'public class Main { public static void main(String[] args) { System.out.println("Hello from Java!"); } }' > src/Main.java
-
-      - name: Compile Java source files
-        run: javac src/*.java
-
-      - name: Run Java program
-        run: java -cp src Main
-
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: compile java source
+        run: javac -d bin src/Hello.java
+      - name: run java program
+        run: java -cp bin Hello

@@ -1,0 +1,24 @@
+name: Java Compile and Run
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create sample Java file (if not exists)
+        run: |
+          mkdir -p src
+          echo 'public class Main { public static void main(String[] args) { System.out.println("Hello from Java!"); } }' > src/Main.java
+
+      - name: Compile Java source files
+        run: javac src/*.java
+
+      - name: Run Java program
+        run: java -cp src Main
+
